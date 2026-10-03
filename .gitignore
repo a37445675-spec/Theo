@@ -1,0 +1,55 @@
+# === Python / Django ===
+__pycache__/
+*.py[cod]
+*.so
+venv/
+.venv/
+env/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# === Variables d'environnement (SECRETS) ===
+.env
+.env.local
+.env.production
+.env.docker
+*.env
+
+# === Base de données locale ===
+*.sqlite3
+db.sqlite3
+
+# === Logs & cache ===
+*.log
+logs/
+.cache/
+
+# === Media & static (lourds) ===
+media/
+staticfiles/
+backups/
+
+# === Node.js ===
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === Backups ===
+*.bak
+*.backup

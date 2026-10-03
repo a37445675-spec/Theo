@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+.env
+staticfiles/*
+!staticfiles/.gitkeep
+media/*
+!media/.gitkeep
+.DS_Store
+
+# === Phase 12.1 — Production ===
+.env.production
+.env.local
+*.log
+logs/
+*.bak
