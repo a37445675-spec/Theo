@@ -287,7 +287,7 @@ RATELIMIT_USE_CACHE = "default"
 
 # Désactiver la Browsable API en production
 REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = (
-    "rest_framework.renderers.JSONRenderer",
+    "djangorestframework_camel_case.render.CamelCaseJSONRenderer",
 )
 
 # Désactiver Swagger en production (optionnel)
