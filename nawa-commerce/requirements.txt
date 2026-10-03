@@ -25,3 +25,5 @@ requests>=2.31
 django-redis>=5.4.0
 django-ratelimit>=4.1.0
 sentry-sdk>=2.0.0
+Add-Content -Path "requirements.txt" -Value "django-cloudinary-storage>=0.3.0"
+Add-Content -Path "requirements.txt" -Value "cloudinary>=1.40.0"
