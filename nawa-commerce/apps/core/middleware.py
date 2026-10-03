@@ -2,6 +2,7 @@
 Middleware de cache HTTP pour les endpoints publics.
 Ajoute des headers Cache-Control aux réponses API publiques.
 """
+import re
 from django.utils.deprecation import MiddlewareMixin
 
 
