@@ -136,3 +136,19 @@ class ProductWriteSerializer(serializers.ModelSerializer):
         except Exception as exc:
             raise serializers.ValidationError({"attributes": str(exc)})
         return attrs
+
+
+# ============================================================
+#  CATEGORY ATTRIBUTES SERIALIZER
+# ============================================================
+
+class CategoryAttributeSerializer(serializers.Serializer):
+    """Serializer pour les attributs dynamiques d'une catégorie."""
+    code = serializers.CharField()
+    label = serializers.CharField()
+    attribute_type = serializers.CharField(source="attribute.attribute_type")
+    unit = serializers.CharField(source="attribute.unit")
+    choices = serializers.JSONField(source="attribute.choices")
+    help_text = serializers.CharField(source="attribute.help_text")
+    is_required = serializers.BooleanField()
+    order = serializers.IntegerField(source="attribute.id")
