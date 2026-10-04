@@ -926,3 +926,69 @@ a { color: var(--color-primary); }
   }
 }
 /* ===== Fin Méga Menu ===== */
+
+/* ===== Mega Menu Multi-Niveaux ===== */
+.mega-subitem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mega-subitem > .mega-sublink {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.mega-cascade-arrow {
+  font-size: 0.9rem;
+  opacity: 0.4;
+  margin-left: 8px;
+}
+
+/* Sous-menu en cascade (niveau 2+) */
+.mega-cascade {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 8px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+  padding: 16px 20px;
+  min-width: 200px;
+  list-style: none;
+  z-index: 110;
+  animation: mega-fade-in 0.2s ease;
+}
+
+.mega-cascade .mega-sublink {
+  display: block;
+  padding: 6px 0;
+  color: #221B15;
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.15s, padding-left 0.15s;
+}
+
+.mega-cascade .mega-sublink:hover {
+  color: var(--color-primary, #C1652F);
+  padding-left: 4px;
+}
+
+/* Responsive : les cascades deviennent inline */
+@media (max-width: 900px) {
+  .mega-cascade {
+    position: static;
+    margin-left: 0;
+    margin-top: 4px;
+    box-shadow: none;
+    padding: 4px 0 4px 16px;
+    background: transparent;
+  }
+}
+/* ===== Fin Mega Menu Multi-Niveaux ===== */
