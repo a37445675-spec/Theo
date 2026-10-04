@@ -13,10 +13,8 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        {/* Logo */}
         <Link to="/" className="logo">NAWA</Link>
 
-        {/* Burger mobile */}
         <button
           className="menu-toggle"
           onClick={() => setMenuOpen((v) => !v)}
@@ -25,17 +23,13 @@ export default function Header() {
           <span /><span /><span />
         </button>
 
-        {/* Backdrop mobile */}
         <div
           className={`nav-backdrop ${menuOpen ? "is-open" : ""}`}
           onClick={() => setMenuOpen(false)}
         />
 
-        {/* Menu dynamique (CMS) */}
         <nav className={`main-nav ${menuOpen ? "is-open" : ""}`}>
           <MegaMenuHeader />
-
-          {/* Bouton Gestion (staff uniquement) */}
           {isShopManager && (
             <Link to="/gestion/commandes" className="nav-link nav-link-cta">
               Gestion
@@ -43,7 +37,6 @@ export default function Header() {
           )}
         </nav>
 
-        {/* Actions */}
         <div className="header-actions">
           <div className="account-menu">
             <button
