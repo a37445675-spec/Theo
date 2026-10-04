@@ -10,23 +10,25 @@ class CacheControlMiddleware(MiddlewareMixin):
     """
     Ajoute des headers Cache-Control sur les réponses API.
     Différencie les endpoints publics (cacheables) des privés (non cacheables).
-    """
-
-    # Endpoints publics cacheables (regex, durée en secondes)
+    """    # Endpoints publics cacheables (regex, durée en secondes)
+    # Durées courtes pour permettre des modifications rapides depuis l'admin.
     PUBLIC_CACHE = [
-        (r"^/api/v1/design-system/", 3600),         # 1 heure
-        (r"^/api/v1/navigation/", 1800),            # 30 minutes
-        (r"^/api/v1/translations/", 3600),          # 1 heure
-        (r"^/api/v1/feature-flags/", 300),          # 5 minutes
-        (r"^/api/v1/announcements/", 300),          # 5 minutes
-        (r"^/api/v1/media-library/", 1800),         # 30 minutes
-        (r"^/api/v1/catalog/categories/", 1800),    # 30 minutes
-        (r"^/api/v1/catalog/products/", 300),       # 5 minutes
-        (r"^/api/v1/blog/categories/", 1800),       # 30 minutes
-        (r"^/api/v1/blog/tags/", 1800),             # 30 minutes
-        (r"^/api/v1/blog/posts/", 300),             # 5 minutes
-        (r"^/api/v1/seo/", 3600),                   # 1 heure
-        (r"^/api/v1/redirects/", 3600),             # 1 heure
+        # Contenu CMS modifiable fréquemment
+        (r"^/api/v1/navigation/", 30),           # 30 secondes
+        (r"^/api/v1/announcements/", 30),        # 30 secondes
+        (r"^/api/v1/feature-flags/", 30),        # 30 secondes
+        (r"^/api/v1/design-system/", 30),        # 30 secondes
+        (r"^/api/v1/translations/", 60),         # 1 minute
+        (r"^/api/v1/media-library/", 300),       # 5 minutes
+        (r"^/api/v1/redirects/", 60),            # 1 minute
+        (r"^/api/v1/seo/", 300),                 # 5 minutes
+        # Catalogue
+        (r"^/api/v1/catalog/categories/", 60),   # 1 minute
+        (r"^/api/v1/catalog/products/", 30),     # 30 secondes
+        # Blog
+        (r"^/api/v1/blog/categories/", 60),      # 1 minute
+        (r"^/api/v1/blog/tags/", 60),            # 1 minute
+        (r"^/api/v1/blog/posts/", 30),           # 30 secondes
     ]
 
     # Endpoints jamais cacheables
