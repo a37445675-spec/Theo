@@ -5,6 +5,7 @@
 
 // === Bootstrap CSRF (doit être importé en premier) ===
 import { bootstrapCsrf } from "./api/axiosConfig";
+import PuckPage from "./pages/PuckPage.jsx";
 
 // === Providers externes ===
 import { HelmetProvider } from "react-helmet-async";
@@ -190,6 +191,8 @@ export default function App() {
                             />
 
                             {/* ---- 404 ---- */}
+                                                        <Route path="/pages/:pageId" element={<PuckPage />} />
+
                             <Route path="*" element={<NotFound />} />
                           </Routes>
                         </PageTransition>
