@@ -18,15 +18,16 @@ export default function PuckPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/v1/cms/widgets/?page=${pageId}`)
+    fetch(`/api/v1/cms/pages/${pageId}/public/`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((widgets) => {
-        const list = Array.isArray(widgets) ? widgets : widgets.results || [];
+      .then((response) => {
+        // Nouvelle API : { page: {...}, widgets: [...] }
+        const widgets = response.widgets || (Array.isArray(response) ? response : []);
         setData({
-          content: list.map(widgetToPuck),
+          content: widgets.map(widgetToPuck),
           root: { props: {} },
         });
       })

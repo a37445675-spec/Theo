@@ -1,3 +1,4 @@
+from rest_framework.decorators import api_view, permission_classes
 """Vues API pour le Widget Builder."""
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -110,3 +111,48 @@ class ReusableSectionViewSet(viewsets.ModelViewSet):
     queryset = ReusableSection.objects.filter(is_active=True)
     serializer_class = ReusableSectionSerializer
     permission_classes = [IsAdminUser]
+
+
+# ============================================================
+#  ENDPOINT PUBLIC — Widgets d'une page (sans auth)
+# ============================================================
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def public_page_widgets(request, page_id):
+    """
+    Endpoint public : retourne les widgets d'une page.
+    Accessible sans authentification pour afficher les pages publiques.
+
+    GET /api/v1/cms/pages/{page_id}/public/
+    """
+    from .models import PageTemplate, Widget
+    from .widget_serializers import WidgetSerializer
+
+    try:
+        page = PageTemplate.objects.get(pk=page_id)
+    except PageTemplate.DoesNotExist:
+        return Response(
+            {"detail": "Page introuvable."},
+            status=404,
+        )
+
+    # Seuls les widgets racine (parent=None)
+    widgets = Widget.objects.filter(page=page, parent=None).order_by("order")
+
+    # Filtrer les widgets non visibles
+    widgets = [w for w in widgets if w.is_visible]
+
+    serializer = WidgetSerializer(widgets, many=True, context={"request": request})
+    return Response({
+        "page": {
+            "id": page.pk,
+            "name": page.name,
+            "template_type": page.template_type,
+        },
+        "widgets": serializer.data,
+    })
